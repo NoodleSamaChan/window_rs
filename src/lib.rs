@@ -32,6 +32,10 @@ impl WindowBuffer {
         self.buffer.clone()
     }
 
+    pub fn reset(&mut self) {
+        self.buffer.fill(0);
+    }
+
     pub fn get(&self, x: isize, y: isize) -> Option<u32> {
         if (x >= 0) && ((x as usize) < self.width()) && (y >= 0) && ((y as usize) < self.height()) {
             Some(self[(x as usize, y as usize)])
