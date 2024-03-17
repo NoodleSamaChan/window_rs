@@ -1,5 +1,4 @@
 use std::fmt;
-use insta::assert_snapshot;
 
 #[derive(Debug)]
 pub struct WindowBuffer {
@@ -104,6 +103,7 @@ impl std::ops::IndexMut<(usize, usize)> for WindowBuffer {
 #[cfg(test)]
 mod test {
     use super::*;
+    use insta::assert_snapshot;
 
     #[test]
     fn display_window_buffer() {
