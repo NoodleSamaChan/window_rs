@@ -8,10 +8,7 @@ pub struct WindowBuffer {
 }
 
 impl WindowBuffer {
-    pub fn new(
-        width: usize,
-        height: usize,
-    ) -> Self {
+    pub fn new(width: usize, height: usize) -> Self {
         Self {
             width,
             height,
@@ -31,6 +28,10 @@ impl WindowBuffer {
         self.buffer.clone()
     }
 
+    pub fn fill(&mut self, with: u32) {
+        self.buffer.fill(with);
+    }
+
     pub fn reset(&mut self) {
         self.buffer.fill(0);
     }
@@ -42,7 +43,6 @@ impl WindowBuffer {
             None
         }
     }
-
 }
 
 impl fmt::Display for WindowBuffer {
@@ -199,5 +199,26 @@ mod test {
         #.#.
         "###
         );
+    }
+
+    #[test]
+    fn test_fill() {
+        let mut buffer = WindowBuffer::new(4, 4);
+
+        // ensure that all the cells in the buffer are equal to 0 by default
+        for x in 0..buffer.width() {
+            for y in 0..buffer.height() {
+                assert_eq!(buffer[(x, y)], 0);
+            }
+        }
+
+        buffer.fill(36);
+
+        // ensure that all the cells in the buffer are now equal to 36
+        for x in 0..buffer.width() {
+            for y in 0..buffer.height() {
+                assert_eq!(buffer[(x, y)], 36);
+            }
+        }
     }
 }
